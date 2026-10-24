@@ -17,7 +17,7 @@ La versione completa è in `presentazione.html`; la breve è in `5-minuti/presen
 Entrambe condividono immagini e librerie nelle cartelle `img/` e `lib/` della repository e possono essere aperte offline.
 I collegamenti precedenti alla versione completa restano validi, compresi quelli alla pagina iniziale con il numero di slide nel frammento URL.
 
-La versione breve contiene il montaggio selezionato il 24 ottobre 2026: 29 schermate principali e 22 precedenti in riserva. Il discorso deve ancora essere ridotto e cronometrato per verificare la durata effettiva di cinque minuti.
+La versione breve contiene il montaggio selezionato il 24 ottobre 2026: 24 schermate principali e 22 precedenti in riserva. Il discorso deve ancora essere ridotto e cronometrato per verificare la durata effettiva di cinque minuti.
 
 ## Pubblicazione
 

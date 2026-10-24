@@ -1770,56 +1770,97 @@ html.print-pdf body .reveal .slides section.rp-future-motion.present .g4-fut>:is
 </style>
 
 <style id="btr-vulnerability-intro">
-/* Slide 04. Un solo img mantiene l'auto-animate originale: macchina e vulnerabilità sono lo stesso SVG. */
-.btr-intro .k-scene .k{position:absolute;box-sizing:border-box}
-.btr-intro .btr-machine-label{display:grid}
-.btr-intro .btr-machine-label>b{grid-area:1/1;transition:opacity .2s ease,transform .3s cubic-bezier(.2,.7,.2,1),visibility .2s}
-.btr-intro .btr-exercise-name{opacity:0;visibility:hidden;transform:translateY(8px)}
-.btr-intro .btr-callout{border-left:3px solid var(--accent);padding:0 0 0 22px}
-.btr-intro .btr-callout b{display:block;font-size:30px;color:var(--accent-ink);margin-bottom:8px}
-.btr-intro .btr-callout span{display:block;font-size:25px;line-height:1.3;color:var(--muted)}
-.btr-intro .btr-definition{transition:opacity .2s ease,visibility .2s}
-.btr-intro .btr-consequence,.btr-intro .btr-intent{font-size:25px;text-align:center;line-height:1.35;color:var(--muted);font-style:italic}
-.btr-intro .btr-consequence b,.btr-intro .btr-intent b{color:var(--accent-ink);font-style:normal}
-.btr-intro .btr-intent{opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s ease,transform .3s cubic-bezier(.2,.7,.2,1),visibility .2s}
-.btr-intro:has(.btr-roles.visible) .btr-definition{opacity:0;visibility:hidden;pointer-events:none}
-.btr-intro:has(.btr-roles.visible) .btr-system-name{opacity:0;visibility:hidden;transform:translateY(-8px)}
-.btr-intro:has(.btr-roles.visible) .btr-exercise-name{opacity:1;visibility:visible;transform:none;transition-delay:.18s}
-.btr-intro:has(.btr-roles.visible):not(:has(.btr-goal.visible)) .btr-intent{opacity:1;visibility:visible;transform:none;transition-delay:.36s}
-.reveal .slides .btr-intro .fragment.btr-roles,.reveal .slides .btr-intro .fragment.btr-goal{transition:none}
-.btr-intro .btr-designer,.btr-intro .btr-participant{position:absolute;inset:0}
-.btr-intro .btr-roles .k{opacity:0;transform:translateY(12px);transition:opacity .3s ease,transform .3s cubic-bezier(.2,.7,.2,1)}
-.btr-intro .btr-roles.visible .btr-designer .k{opacity:1;transform:none;transition-delay:.15s}
-.btr-intro .btr-roles.visible .btr-participant .k{opacity:1;transform:none;transition-delay:.36s}
-.btr-intro .btr-designer .k-draw,.btr-intro .btr-designer .k-head{--d:.7s}
-.btr-intro .btr-participant .k-draw,.btr-intro .btr-participant .k-head{--d:1.15s}
-.btr-intro .btr-arrow-label{opacity:0;transition:opacity .14s ease}
-.btr-intro .btr-roles.visible .btr-arrow-label{opacity:1;transition-delay:.72s}
-.btr-intro .btr-goal-copy{line-height:1.3}
-.btr-intro .btr-goal-copy b{display:block;font-size:27px;color:var(--accent-ink)}
-.btr-intro .btr-goal-copy span{display:block;font-size:24px;color:var(--muted);font-style:italic;margin-top:8px}
-.btr-intro .btr-goal .k-draw,.btr-intro .btr-goal .k-head{--d:.55s}
-.btr-intro .btr-root-label{text-align:left}
-.btr-intro .btr-goal .k{opacity:0;transform:translateY(12px);transition:opacity .3s ease,transform .3s cubic-bezier(.2,.7,.2,1)}
-.btr-intro .btr-goal.visible .btr-goal-copy{opacity:1;transform:none;transition-delay:.12s}
-.btr-intro .btr-goal.visible .btr-root,.btr-intro .btr-goal.visible .btr-root-label{opacity:1;transform:none;transition-delay:.4s}
-/* Stessa comparsa k-in usata nel deck; nessuna pulsazione indipendente sovrapposta alla macchina. */
-.btr-intro.present .btr-enter{animation:k-in .3s cubic-bezier(.2,.7,.2,1) .45s both}
-.btr-intro.present .btr-machine:not([data-auto-animate-target]){animation:k-in .3s cubic-bezier(.2,.7,.2,1) both}
-html.capture .btr-intro .btr-definition,html.print-pdf .btr-intro .btr-definition,
-html.capture .btr-intro .btr-system-name,html.print-pdf .btr-intro .btr-system-name,
-html.capture .btr-intro .btr-intent,html.print-pdf .btr-intro .btr-intent{display:none!important}
-html.capture .btr-intro .btr-exercise-name,html.print-pdf .btr-intro .btr-exercise-name,
-html.capture .btr-intro .btr-roles .k,html.print-pdf .btr-intro .btr-roles .k,
-html.capture .btr-intro .btr-goal .k,html.print-pdf .btr-intro .btr-goal .k,
-html.capture .btr-intro .btr-arrow-label,html.print-pdf .btr-intro .btr-arrow-label{opacity:1!important;visibility:visible!important;transform:none!important}
-@media(prefers-reduced-motion:reduce){.btr-intro *{animation:none!important;transition:none!important}}
-@media print{
- .btr-intro .btr-definition,.btr-intro .btr-system-name,.btr-intro .btr-intent{display:none!important}
- .btr-intro .btr-exercise-name,.btr-intro .btr-roles .k,.btr-intro .btr-goal .k,.btr-intro .btr-arrow-label{opacity:1!important;visibility:visible!important;transform:none!important}
- .btr-intro *{animation:none!important;transition:none!important}
- .btr-intro .k-draw{stroke-dashoffset:0!important}.btr-intro .k-head{opacity:1!important}
-}
+/* Slide 04. Tre stati della stessa figura; tutti gli stili restano locali. */
+.s4-story{--s4-ease:cubic-bezier(.2,.7,.2,1)}
+.s4-story .s4-scene{height:450px;transform:translateY(-24px)}
+.s4-story .s4-build,.s4-story .s4-goal{position:absolute!important;inset:0 auto auto 0;width:0;height:0;pointer-events:none;opacity:0!important}
+.s4-story .s4-system{position:absolute;left:270px;top:94px;width:320px;transition:left .55s var(--s4-ease)}
+.s4-story .s4-envelope{position:relative;width:320px;height:272px;filter:drop-shadow(0 10px 14px rgba(90,55,30,.07));transition:filter .3s ease}
+.s4-story .s4-boundary{display:block;width:320px;height:272px;overflow:visible;opacity:1;transition:opacity .3s ease .25s}
+.s4-story .s4-surface{fill:#F5EFE5;transition:fill .25s ease}
+.s4-story .s4-contour{fill:none;stroke:#B8AA99;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:stroke .25s ease}
+.s4-story .s4-focus{fill:var(--paper);fill-opacity:1;stroke:var(--accent);stroke-width:1.5;transition:fill-opacity .2s ease .1s,stroke-opacity .2s ease .1s}
+.s4-story .s4-weakness-icon{opacity:1;transform-origin:316px 136px;transition:opacity .2s ease .1s,transform .25s var(--s4-ease) .1s}
+.s4-story .s4-computer{position:absolute;left:52px;top:28px;width:208px;height:208px}
+.s4-story .s4-system-name{position:relative;display:grid;text-align:center;margin-top:17px;line-height:1.15;top:0;transition:top .55s var(--s4-ease)}
+.s4-story .s4-system-name b{grid-area:1/1;font-size:29px;white-space:nowrap;transition:opacity .18s ease,transform .3s var(--s4-ease),visibility .18s}
+.s4-story .s4-name-b2r{opacity:0;visibility:hidden;transform:translateY(8px)}
+.s4-story .s4-plane{position:absolute;inset:0;width:1112px;height:450px;overflow:visible;pointer-events:none}
+.s4-story .s4-definition{transition:opacity .22s ease .4s,visibility .22s .4s}
+.s4-story .s4-definition-copy{position:absolute;left:668px;top:196px;width:300px}
+.s4-story .s4-definition-copy b{display:block;font-size:32px;color:var(--accent-ink);line-height:1.1;margin-bottom:10px}
+.s4-story .s4-definition-copy span{display:block;font-size:25px;color:var(--muted);line-height:1.25}
+.s4-story .s4-definition .s4-plane path{fill:none;stroke:var(--accent);stroke-width:1.6}
+.s4-story .s4-definition .s4-plane circle{fill:var(--accent)}
+.s4-story .s4-designers,.s4-story .s4-participant{position:absolute;top:181px;text-align:center;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .3s ease,transform .3s var(--s4-ease),visibility .3s}
+.s4-story .s4-designers{left:0;width:260px}
+.s4-story .s4-participant{left:862px;width:250px;top:172px}
+.s4-story .s4-designers img{display:block;width:238px;height:128px;object-fit:contain;margin:0 auto 30px}
+.s4-story .s4-participant img{display:block;width:144px;height:137px;object-fit:contain;margin:0 auto 30px}
+.s4-story .s4-designers b,.s4-story .s4-participant b{display:block;font-size:27px;line-height:1.15;color:var(--title)}
+.s4-story .s4-designers small,.s4-story .s4-participant small{display:block;font-size:20px;color:var(--muted);font-style:italic;margin-top:6px;white-space:nowrap}
+.s4-story .s4-participant b{color:var(--accent-ink)}
+.s4-story .s4-draw{fill:none;stroke:var(--accent);stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+.s4-story .s4-draw{stroke-dasharray:1 1;stroke-dashoffset:1;transition:stroke-dashoffset .3s var(--s4-ease)}
+.s4-story .s4-design-link{opacity:0;transition:opacity .25s ease}
+.s4-story .s4-use-link{opacity:0;transition:opacity .18s ease}
+.s4-story .s4-root-target{position:absolute;left:951px;top:124px;width:152px;display:flex;flex-direction:row;align-items:center;gap:10px;opacity:0;visibility:hidden;transform-origin:36px 72px;transition:opacity .18s ease,visibility .18s}
+.s4-story .s4-root-target b{display:block;font:400 27px/1.15 var(--mono);color:var(--accent-ink)}
+.s4-story .s4-root-target>svg{display:block;width:72px;height:72px;flex:none;overflow:visible;background:none;border:0}
+
+.s4-story .s4-root-target .s4-crown-solid{transform:rotate(-4deg);transform-origin:50% 81%}
+/* Stesso terracotta tenue, opaco solo qui per coprire i capelli. */
+.s4-story .s4-root-target .s4-crown-solid .accent-layer{fill:#EDCEC1;opacity:1}
+
+.s4-story:has(.s4-build.visible) .s4-system{left:408px}
+.s4-story:has(.s4-build.visible) .s4-boundary{opacity:0;transition-delay:.05s}
+.s4-story:has(.s4-build.visible) .s4-envelope{filter:none}
+.s4-story:has(.s4-build.visible) .s4-system-name{top:-55px}
+.s4-story:has(.s4-build.visible) .s4-definition{opacity:0;visibility:hidden;transition-delay:0s}
+.s4-story:has(.s4-build.visible) .s4-designers{opacity:1;visibility:visible;transform:none;transition-delay:.17s}
+.s4-story:has(.s4-build.visible) .s4-participant{opacity:1;visibility:visible;transform:none;transition-delay:.62s}
+.s4-story:has(.s4-build.visible) .s4-design-link{opacity:1;transition-delay:.17s}
+.s4-story:has(.s4-build.visible) .s4-use-link{opacity:1;transition-delay:.62s}
+.s4-story:has(.s4-build.visible) .s4-design-link .s4-draw{stroke-dashoffset:0;transition-delay:.38s}
+.s4-story:has(.s4-build.visible) .s4-name-system{opacity:0;visibility:hidden;transform:translateY(-8px);transition-delay:.25s}
+.s4-story:has(.s4-build.visible) .s4-name-b2r{opacity:1;visibility:visible;transform:none;transition-delay:.45s}
+.s4-story:has(.s4-build.visible) .s4-use-link .s4-draw{stroke-dashoffset:0;transition-delay:.82s}
+.s4-story:has(.s4-goal.visible) .s4-designers{opacity:.48;transition-delay:0s}
+.s4-story:has(.s4-goal.visible) .s4-design-link{opacity:.25;transition-delay:0s}
+.s4-story:has(.s4-goal.visible) .s4-use-link{opacity:.7;transition-delay:0s}
+.s4-story:has(.s4-goal.visible) .s4-root-target{opacity:1;visibility:visible}
+.s4-story.present:has(.s4-goal.visible) .s4-root-target{animation:s4-crown-bubble .45s cubic-bezier(.2,.7,.2,1) .12s both}
+@keyframes s4-crown-bubble{0%{opacity:0;transform:translateY(12px) scale(.55)}70%{opacity:1;transform:translateY(-3px) scale(1.08)}100%{opacity:1;transform:none}}
+/* Prima il sistema, poi il punto debole e la sua annotazione. */
+.s4-story .s4-intact{opacity:0}
+.s4-story .s4-focus{transform-origin:316px 136px}
+.s4-story.present:not(:has(.s4-build.visible)) .s4-intact{animation:s4-perimeter-open .2s ease .62s both}
+.s4-story.present:not(:has(.s4-build.visible)) .s4-focus{animation:s4-weakness-reveal .38s var(--s4-ease) .62s both}
+.s4-story.present:not(:has(.s4-build.visible)) .s4-weakness-icon{animation:s4-weakness-reveal .38s var(--s4-ease) .62s both}
+.s4-story.present:not(:has(.s4-build.visible)) .s4-crack{stroke-dasharray:1;animation:s4-fracture .5s cubic-bezier(.35,0,.25,1) .8s both}
+@keyframes s4-perimeter-open{from{opacity:1}to{opacity:0}}
+@keyframes s4-weakness-reveal{0%{opacity:0;transform:scale(.72)}70%{opacity:1;transform:scale(1.04)}100%{opacity:1;transform:none}}
+@keyframes s4-fracture{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes s4-enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.s4-story.present .s4-envelope{animation:s4-enter .35s var(--s4-ease) both}
+.s4-story.present .s4-system-name{animation:s4-enter .3s var(--s4-ease) .08s both}
+.s4-story.present:not(:has(.s4-build.visible)) .s4-definition-copy,.s4-story.present:not(:has(.s4-build.visible)) .s4-definition>.s4-plane{animation:s4-enter .3s var(--s4-ease) .68s both}
+@media(prefers-reduced-motion:reduce){.s4-story *{animation:none!important;transition:none!important}}
+/* Stampa/cattura: la cornice introduttiva non compare nello stato conclusivo. */
+html.capture .s4-story *,html.print-pdf .s4-story *{animation:none!important;transition:none!important}
+html.capture .s4-story .s4-system,html.print-pdf .s4-story .s4-system{left:408px}
+html.capture .s4-story .s4-system-name,html.print-pdf .s4-story .s4-system-name{top:-55px}
+html.capture .s4-story .s4-envelope,html.print-pdf .s4-story .s4-envelope{filter:none}
+html.capture .s4-story .s4-boundary,html.print-pdf .s4-story .s4-boundary,
+html.capture .s4-story .s4-definition,html.print-pdf .s4-story .s4-definition,
+html.capture .s4-story .s4-name-system,html.print-pdf .s4-story .s4-name-system{display:none!important}
+html.capture .s4-story .s4-name-b2r,html.print-pdf .s4-story .s4-name-b2r,
+html.capture .s4-story .s4-participant,html.print-pdf .s4-story .s4-participant,
+html.capture .s4-story .s4-root-target,html.print-pdf .s4-story .s4-root-target{opacity:1!important;visibility:visible!important;transform:none!important}
+html.capture .s4-story .s4-designers,html.print-pdf .s4-story .s4-designers{opacity:.48!important;visibility:visible!important;transform:none!important}
+html.capture .s4-story .s4-draw,html.print-pdf .s4-story .s4-draw{stroke-dashoffset:0!important}
+html.capture .s4-story .s4-design-link,html.print-pdf .s4-story .s4-design-link{opacity:.25!important}
+html.capture .s4-story .s4-use-link,html.print-pdf .s4-story .s4-use-link{opacity:.7!important}
 </style>
 </head>
 
@@ -2019,43 +2060,60 @@ html.capture .btr-intro .btr-arrow-label,html.print-pdf .btr-intro .btr-arrow-la
 <div class="k k-card row rp-practice fragment" data-fragment-index="0" style="left:0px;top:406px;width:1112px;height:70px"><svg class="deck-icon" width="34" height="34" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="#4A3F37"><path d="M216,113.07v53.22a8,8,0,0,1-2,5.31c-11.3,12.59-38.9,36.4-86,36.4s-74.68-23.81-86-36.4a8,8,0,0,1-2-5.31V113.07L128,160Z" class="accent-layer" fill="#C4532F" opacity="0.25"/><path d="M251.76,88.94l-120-64a8,8,0,0,0-7.52,0l-120,64a8,8,0,0,0,0,14.12L32,117.87v48.42a15.91,15.91,0,0,0,4.06,10.65C49.16,191.53,78.51,216,128,216a130,130,0,0,0,48-8.76V240a8,8,0,0,0,16,0V199.51a115.63,115.63,0,0,0,27.94-22.57A15.91,15.91,0,0,0,224,166.29V117.87l27.76-14.81a8,8,0,0,0,0-14.12ZM128,200c-43.27,0-68.72-21.14-80-33.71V126.4l76.24,40.66a8,8,0,0,0,7.52,0L176,143.47v46.34C163.4,195.69,147.52,200,128,200Zm80-33.75a97.83,97.83,0,0,1-16,14.25V134.93l16-8.53ZM188,118.94l-.22-.13-56-29.87a8,8,0,0,0-7.52,14.12L171,128l-43,22.93L25,96,128,41.07,231,96Z"/></svg><b>Per imparare serve anche esercitarsi</b></div>
 </div></div><aside class="notes">La cybersecurity si occupa della sicurezza dei sistemi informatici: reti, software, sistemi operativi e dati. Per imparare a proteggerli servono conoscenze, ma anche esercitazione pratica. [Click] Occorrono quindi ambienti in cui mettere alla prova queste competenze. La slide successiva introduce i Cyber Range, senza anticiparne qui le caratteristiche.<p class="speaker-reference">Icone: Phosphor Icons, variante duotone. Licenza MIT già presente in img/phosphor/LICENSE.txt.</p></aside></section>
 <section class="b1-trial k6 g7 g7a" data-spec="2" data-sec="1" data-auto-animate data-auto-animate-duration="0.35" data-t="0.6"><div class="slide"><h2 class="g7-crtitle"><span data-id="cr">Cyber Range</span></h2><div class="k-scene"><div class="k g7-def" style="left:0px;top:0px;width:1112px;" >Ambienti informatici di <b>simulazione</b> che riproducono <b>scenari realistici</b> di cybersecurity</div><svg class="k-svg" viewBox="0 0 1112 450" aria-hidden="true"><path class="g7-wall g7a-wall" d="M480 62 V262"/></svg><div class="k k-card g7-node muted g7a-world" style="left:220px;top:96px;width:110px;height:110px;" ><svg class="deck-icon" width="54" height="54" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="#4A3F37"><path d="M213.09,172.48a96,96,0,0,1-80.41,51.41l3.17-16.44a8,8,0,0,0-2-6.95l-19.74-20.33a8,8,0,0,1-1.44-8.69l13.7-30.74a8,8,0,0,1,8.38-4.67l22.82,3.08a8.11,8.11,0,0,1,3.12,1.11ZM116.71,95,129,88.24a7.46,7.46,0,0,0,1.5-1.07l26.91-24.33A8,8,0,0,0,159,53l-10.5-18.81A96.62,96.62,0,0,0,128,32,95.61,95.61,0,0,0,67.78,53.23L56,81.08A8,8,0,0,0,55.88,87l11.5,30.67a8,8,0,0,0,5.81,5l2.69.58L89.2,100a8,8,0,0,1,6.94-4h16.71A7.9,7.9,0,0,0,116.71,95Z" class="accent-layer" fill="#C4532F" opacity="0.25"/><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm88,104a87.62,87.62,0,0,1-6.4,32.94l-44.7-27.49a15.92,15.92,0,0,0-6.24-2.23l-22.82-3.08a16.11,16.11,0,0,0-16,7.86h-8.72l-3.8-7.86a15.91,15.91,0,0,0-11-8.67l-8-1.73L96.14,104h16.71a16.06,16.06,0,0,0,7.73-2l12.25-6.76a16.62,16.62,0,0,0,3-2.14l26.91-24.34A15.93,15.93,0,0,0,166,49.1l-.36-.65A88.11,88.11,0,0,1,216,128ZM143.31,41.34,152,56.9,125.09,81.24,112.85,88H96.14a16,16,0,0,0-13.88,8l-8.73,15.23L63.38,84.19,74.32,58.32a87.87,87.87,0,0,1,69-17ZM40,128a87.53,87.53,0,0,1,8.54-37.8l11.34,30.27a16,16,0,0,0,11.62,10l21.43,4.61L96.74,143a16.09,16.09,0,0,0,14.4,9h1.48l-7.23,16.23a16,16,0,0,0,2.86,17.37l.14.14L128,205.94l-1.94,10A88.11,88.11,0,0,1,40,128Zm102.58,86.78,1.13-5.81a16.09,16.09,0,0,0-4-13.9,1.85,1.85,0,0,1-.14-.14L120,174.74,133.7,144l22.82,3.08,45.72,28.12A88.18,88.18,0,0,1,142.58,214.78Z"/></svg></div><div class="k k-label g7-nl g7a-world" style="left:175px;top:214px;width:200px;" ><b>mondo reale</b></div><div class="k g7-lock g7a-lock" style="left:452px;top:134px;width:56px;height:56px;" ><svg class="deck-icon" width="30" height="30" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="#4A3F37"><path d="M208,88H48a8,8,0,0,0-8,8V208a8,8,0,0,0,8,8H208a8,8,0,0,0,8-8V96A8,8,0,0,0,208,88Zm-80,72a20,20,0,1,1,20-20A20,20,0,0,1,128,160Z" class="accent-layer" fill="#C4532F" opacity="0.25"/><path d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Zm-80-96a28,28,0,0,0-8,54.83V184a8,8,0,0,0,16,0V166.83A28,28,0,0,0,128,112Zm0,40a12,12,0,1,1,12-12A12,12,0,0,1,128,152Z"/></svg></div><div class="k k-card g7-crbox g7a-box" data-id="g7-crbox" style="left:620px;top:72px;width:300px;height:166px"><img class="g7-cube" data-id="k-mach" alt="" src="data:image/svg+xml,%3Csvg%20width%3D%2258%22%20height%3D%2258%22%20aria-hidden%3D%22true%22%20%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%20fill%3D%22%238F3A1F%22%3E%3Cpath%20d%3D%22M128%2C129.09V232a8%2C8%2C0%2C0%2C1-3.84-1l-88-48.16a8%2C8%2C0%2C0%2C1-4.16-7V80.2a8%2C8%2C0%2C0%2C1%2C.7-3.27Z%22%20class%3D%22accent-layer%22%20fill%3D%22%23C4532F%22%20opacity%3D%220.3%22%2F%3E%3Cpath%20d%3D%22M223.68%2C66.15%2C135.68%2C18h0a15.88%2C15.88%2C0%2C0%2C0-15.36%2C0l-88%2C48.17a16%2C16%2C0%2C0%2C0-8.32%2C14v95.64a16%2C16%2C0%2C0%2C0%2C8.32%2C14l88%2C48.17a15.88%2C15.88%2C0%2C0%2C0%2C15.36%2C0l88-48.17a16%2C16%2C0%2C0%2C0%2C8.32-14V80.18A16%2C16%2C0%2C0%2C0%2C223.68%2C66.15ZM128%2C32h0l80.34%2C44L128%2C120%2C47.66%2C76ZM40%2C90l80%2C43.78v85.79L40%2C175.82Zm96%2C129.57V133.82L216%2C90v85.78Z%22%2F%3E%3C%2Fsvg%3E"><b>Cyber Range</b><small>ambiente simulato</small></div><div class="k k-card g7-feat g7a-feat" data-n="1" style="left:0px;top:296px;width:344px;height:100px;" ><svg class="deck-icon" width="34" height="34" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="#4A3F37"><path d="M208,88H48a8,8,0,0,0-8,8V208a8,8,0,0,0,8,8H208a8,8,0,0,0,8-8V96A8,8,0,0,0,208,88Zm-80,72a20,20,0,1,1,20-20A20,20,0,0,1,128,160Z" class="accent-layer" fill="#C4532F" opacity="0.25"/><path d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Zm-80-96a28,28,0,0,0-8,54.83V184a8,8,0,0,0,16,0V166.83A28,28,0,0,0,128,112Zm0,40a12,12,0,1,1,12-12A12,12,0,0,1,128,152Z"/></svg><div><b>Isolato</b><small>si sbaglia senza fare danni</small></div></div><div class="k k-card g7-feat g7a-feat" data-n="2" style="left:384px;top:296px;width:344px;height:100px;" ><svg class="deck-icon" width="34" height="34" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="#4A3F37"><path d="M176,128a48,48,0,1,1-48-48A48,48,0,0,1,176,128Z" class="accent-layer" fill="#C4532F" opacity="0.25"/><path d="M221.87,83.16A104.1,104.1,0,1,1,195.67,49l22.67-22.68a8,8,0,0,1,11.32,11.32l-96,96a8,8,0,0,1-11.32-11.32l27.72-27.72a40,40,0,1,0,17.87,31.09,8,8,0,1,1,16-.9,56,56,0,1,1-22.38-41.65L184.3,60.39a87.88,87.88,0,1,0,23.13,29.67,8,8,0,0,1,14.44-6.9Z"/></svg><div><b>Realistico</b><small>riproduce sistemi veri</small></div></div><div class="k k-card g7-feat g7a-feat" data-n="3" style="left:768px;top:296px;width:344px;height:100px;" ><svg class="deck-icon" width="34" height="34" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="#4A3F37"><path d="M216,113.07v53.22a8,8,0,0,1-2,5.31c-11.3,12.59-38.9,36.4-86,36.4s-74.68-23.81-86-36.4a8,8,0,0,1-2-5.31V113.07L128,160Z" class="accent-layer" fill="#C4532F" opacity="0.25"/><path d="M251.76,88.94l-120-64a8,8,0,0,0-7.52,0l-120,64a8,8,0,0,0,0,14.12L32,117.87v48.42a15.91,15.91,0,0,0,4.06,10.65C49.16,191.53,78.51,216,128,216a130,130,0,0,0,48-8.76V240a8,8,0,0,0,16,0V199.51a115.63,115.63,0,0,0,27.94-22.57A15.91,15.91,0,0,0,224,166.29V117.87l27.76-14.81a8,8,0,0,0,0-14.12ZM128,200c-43.27,0-68.72-21.14-80-33.71V126.4l76.24,40.66a8,8,0,0,0,7.52,0L176,143.47v46.34C163.4,195.69,147.52,200,128,200Zm80-33.75a97.83,97.83,0,0,1-16,14.25V134.93l16-8.53ZM188,118.94l-.22-.13-56-29.87a8,8,0,0,0-7.52,14.12L171,128l-43,22.93L25,96,128,41.07,231,96Z"/></svg><div><b>Didattico</b><small>una risorsa per imparare</small></div></div></div></div><aside class="notes">Per Cyber Range si intendono ambienti informatici di simulazione, progettati per riprodurre scenari realistici di cybersecurity. Sono separati dal mondo reale: chi si esercita può attaccare e sbagliare senza fare danni. Per questo sono una risorsa fondamentale per l’apprendimento. Un esempio concreto di scenario sono le macchine Boot-to-Root.</aside></section>
-<section class="b1-trial k6 btr-intro" data-spec="2" data-sec="1" data-auto-animate data-auto-animate-duration="0.6" data-t="1.2">
+<section class="b1-trial k6 s4-story" data-spec="2" data-sec="1" data-t="1.2">
   <div class="slide">
     <h2>Le macchine Boot-to-Root</h2>
-    <div class="k-scene">
-      <!-- Un solo oggetto: sistema informatico, poi esercitazione Boot-to-Root. -->
-      <img class="k k-img btr-machine" data-id="k-mach" src="img/macchina_b2r_vulnerabile.svg" alt="Sistema informatico usato come macchina Boot-to-Root" style="left:458px;top:62px;width:196px;height:188px">
-      <div class="k k-label btr-machine-label btr-enter" data-id="k-machlab" style="left:366px;top:258px;width:380px">
-        <b class="btr-system-name">Sistema informatico</b>
-        <b class="btr-exercise-name">Macchina Boot-to-Root</b>
-      </div>
-      <div class="btr-definition">
-        <div class="k btr-callout btr-enter" style="left:58px;top:112px;width:300px">
-          <b>Vulnerabilità</b>
-          <span>Un punto debole<br>del sistema</span>
+    <div class="k-scene s4-scene">
+      <span class="fragment s4-build" data-fragment-index="0" aria-hidden="true"></span>
+      <span class="fragment s4-goal" data-fragment-index="1" aria-hidden="true"></span>
+
+      <!-- La cornice introduce il sistema e si dissolve quando compaiono i ruoli. -->
+      <div class="s4-system">
+        <div class="s4-envelope">
+          <svg class="s4-boundary" viewBox="0 0 320 272" aria-hidden="true">
+            <path class="s4-surface" d="M24 4 H292 Q316 4 316 28 V244 Q316 268 292 268 H28 Q4 268 4 244 V28 Q4 4 28 4 Z"/>
+            <path class="s4-contour" d="M316 110 V28 Q316 4 292 4 H28 Q4 4 4 28 V244 Q4 268 28 268 H292 Q316 268 316 244 V162"/>
+            <path class="s4-contour s4-intact" d="M316 110 V162"/>
+            <circle class="s4-focus" cx="316" cy="136" r="29"/>
+            <g class="s4-weakness-icon" aria-hidden="true">
+              <svg x="299" y="119" width="34" height="34" viewBox="0 0 256 256">
+                <path d="M128 24 40 56v64c0 64 88 112 88 112s88-48 88-112V56Z" fill="#C4532F" opacity=".2"/>
+                <path d="M128 24 40 56v64c0 64 88 112 88 112s88-48 88-112V56Z" fill="none" stroke="#4A3F37" stroke-width="16" stroke-linejoin="round"/>
+                <path class="s4-crack" pathLength="1" d="m135 24-18 59 20 32-20 33 21 32-10 52" fill="none" stroke="var(--paper)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+                <path class="s4-crack" pathLength="1" d="m135 24-18 59 20 32-20 33 21 32-10 52" fill="none" stroke="#8F3A1F" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </g>
+          </svg>
+          <svg class="s4-computer" viewBox="0 0 256 256" role="img" aria-label="Sistema informatico con un punto debole nel perimetro" fill="#4A3F37"><path d="M240,48V208a8,8,0,0,1-8,8H152a8,8,0,0,1-8-8V48a8,8,0,0,1,8-8h80A8,8,0,0,1,240,48Z" class="accent-layer" fill="#C4532F" opacity="0.25"/><path d="M216,72a8,8,0,0,1-8,8H176a8,8,0,0,1,0-16h32A8,8,0,0,1,216,72Zm-8,24H176a8,8,0,0,0,0,16h32a8,8,0,0,0,0-16Zm40-48V208a16,16,0,0,1-16,16H152a16,16,0,0,1-16-16V192H96v16h16a8,8,0,0,1,0,16H64a8,8,0,0,1,0-16H80V192H32A24,24,0,0,1,8,168V96A24,24,0,0,1,32,72H136V48a16,16,0,0,1,16-16h80A16,16,0,0,1,248,48ZM136,176V88H32a8,8,0,0,0-8,8v72a8,8,0,0,0,8,8Zm96,32V48H152V208h80Zm-40-40a12,12,0,1,0,12,12A12,12,0,0,0,192,168Z"/></svg>
         </div>
-        <div class="k btr-consequence btr-enter" style="left:96px;top:355px;width:920px">Se sfruttato, può <b>compromettere la sicurezza</b> del sistema</div>
+        <div class="s4-system-name"><b class="s4-name-system">Sistema informatico</b><b class="s4-name-b2r">Macchina Boot-to-Root</b></div>
       </div>
-      <!-- Primo click: progettisti, inserimento intenzionale, partecipante. -->
-      <div class="fragment btr-roles" data-fragment-index="0">
-      <div class="btr-designer">
-        <img class="k k-img" src="img/michele_danilo.png" alt="Caricature dei progettisti" style="position:absolute;left:18px;top:116px;width:252px;height:135px">
-        <div class="k k-label" style="position:absolute;left:4px;top:258px;width:280px"><b>Progettisti</b><small>inseriscono le vulnerabilità</small></div>
-        <svg class="k-svg" viewBox="0 0 1112 450" aria-hidden="true"><path class="k-line acc k-draw" d="M282 178 C325 140 385 138 430 166" pathLength="1" /><path class="k-line acc k-head" d="M419.0 165.9 L430 166 L425.1 156.2"/></svg>
+
+      <div class="s4-definition">
+        <svg viewBox="0 0 1112 450" class="s4-plane" aria-hidden="true"><path d="M616 230 H648"/><circle cx="616" cy="230" r="3"/></svg>
+        <div class="s4-definition-copy"><b>Vulnerabilità</b><span>Un punto debole<br>del sistema</span></div>
       </div>
-      <div class="btr-participant">
-        <img class="k k-img" src="img/partecipante_b1.png" alt="Il partecipante con la felpa di Tor Vergata" style="position:absolute;left:882px;top:110px;width:150px;height:141px">
-        <div class="k k-label g7-part" style="position:absolute;left:817px;top:258px;width:280px"><b>Partecipante</b><small>svolge l'esercizio</small></div>
-        <svg class="k-svg" viewBox="0 0 1112 450" aria-hidden="true"><path class="k-line acc k-draw g7-thick" d="M850 178 C805 140 735 138 684 166" pathLength="1" /><path class="k-line acc k-head g7-thick" d="M689.5 156.4 L684 166 L695.0 166.5"/><text x="767" y="124" class="k-alab acc btr-arrow-label" text-anchor="middle">interagisce</text></svg>
+
+      <div class="s4-designers">
+        <img src="img/michele_danilo.png" alt="I progettisti">
+        <b>Progettisti</b><small>realizzano la macchina<br>e inseriscono le vulnerabilità</small>
       </div>
+      <svg class="s4-plane s4-design-link" viewBox="0 0 1112 450" aria-hidden="true">
+        <path class="s4-draw" d="M262 238 C326 202 392 202 444 230 L433 229 L444 230 L437 221" pathLength="1"/>
+      </svg>
+
+      <div class="s4-participant">
+        <img src="img/partecipante_b1.png" alt="Il partecipante">
+        <b>Partecipante</b><small>svolge l’esercizio</small>
       </div>
-      <div class="k btr-intent" style="left:136px;top:355px;width:840px">Vulnerabilità inserite <b>intenzionalmente</b> per creare un’esercitazione</div>
-      <!-- Secondo click: obiettivo, con lo stesso simbolo della slide successiva. -->
-      <div class="fragment btr-goal" data-fragment-index="1">
-        <div class="k btr-goal-copy" style="left:116px;top:354px;width:590px"><b>Individuare e sfruttare le vulnerabilità</b><span>fino a ottenere i privilegi massimi</span></div>
-        <svg class="k-svg" viewBox="0 0 1112 450" aria-hidden="true"><path class="k-line acc k-draw" d="M726 382 H794" pathLength="1"/><path class="k-line acc k-head" d="M784 376 L794 382 L784 388"/></svg>
-        <div class="k k-root btr-root" data-id="btr-root" style="left:820px;top:342px;width:80px;height:80px"><svg class="deck-icon" width="46" height="46" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="#4A3F37"><path d="M216.71,99.73l-15.6,93.59a8,8,0,0,1-7.89,6.68H62.78a8,8,0,0,1-7.89-6.68L39.29,99.73l.08,0a19.82,19.82,0,0,0,9.22-4.16h0L88,144l32-73.65h0a20,20,0,0,0,15.92,0h0L168,144l39.39-48.48h0a19.82,19.82,0,0,0,9.22,4.16Z" class="accent-layer" fill="#C4532F" opacity="0.25"/><path d="M248,80a28,28,0,1,0-51.12,15.77l-26.79,33L146,73.4a28,28,0,1,0-36.06,0L85.91,128.74l-26.79-33a28,28,0,1,0-26.6,12L47,194.63A16,16,0,0,0,62.78,208H193.22A16,16,0,0,0,209,194.63l14.47-86.85A28,28,0,0,0,248,80ZM128,40a12,12,0,1,1-12,12A12,12,0,0,1,128,40ZM24,80A12,12,0,1,1,36,92,12,12,0,0,1,24,80ZM193.22,192H62.78L48.86,108.52,81.79,149A8,8,0,0,0,88,152a7.83,7.83,0,0,0,1.08-.07,8,8,0,0,0,6.26-4.74l29.3-67.4a27,27,0,0,0,6.72,0l29.3,67.4a8,8,0,0,0,6.26,4.74A7.83,7.83,0,0,0,168,152a8,8,0,0,0,6.21-3l32.93-40.52ZM220,92a12,12,0,1,1,12-12A12,12,0,0,1,220,92Z"/></svg></div>
-        <div class="k k-roottxt btr-root-label" data-id="btr-root-label" style="left:916px;top:363px;width:120px">root</div>
+      <svg class="s4-plane s4-use-link" viewBox="0 0 1112 450" aria-hidden="true">
+        <path class="s4-draw" d="M868 236 C806 202 735 202 684 230 L690.6 221.2 L684 230 L694.9 229.1" pathLength="1"/>
+      </svg>
+
+      <!-- Obiettivo finale della macchina, senza anticipare il percorso didattico. -->
+      <div class="s4-root-target">
+        <svg class="deck-icon s4-crown-solid" width="72" height="72" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="#4A3F37"><path d="M216.71,99.73l-15.6,93.59a8,8,0,0,1-7.89,6.68H62.78a8,8,0,0,1-7.89-6.68L39.29,99.73l.08,0a19.82,19.82,0,0,0,9.22-4.16h0L88,144l32-73.65h0a20,20,0,0,0,15.92,0h0L168,144l39.39-48.48h0a19.82,19.82,0,0,0,9.22,4.16Z" class="accent-layer" fill="#C4532F" opacity="0.25"/><path d="M248,80a28,28,0,1,0-51.12,15.77l-26.79,33L146,73.4a28,28,0,1,0-36.06,0L85.91,128.74l-26.79-33a28,28,0,1,0-26.6,12L47,194.63A16,16,0,0,0,62.78,208H193.22A16,16,0,0,0,209,194.63l14.47-86.85A28,28,0,0,0,248,80ZM128,40a12,12,0,1,1-12,12A12,12,0,0,1,128,40ZM24,80A12,12,0,1,1,36,92,12,12,0,0,1,24,80ZM193.22,192H62.78L48.86,108.52,81.79,149A8,8,0,0,0,88,152a7.83,7.83,0,0,0,1.08-.07,8,8,0,0,0,6.26-4.74l29.3-67.4a27,27,0,0,0,6.72,0l29.3,67.4a8,8,0,0,0,6.26,4.74A7.83,7.83,0,0,0,168,152a8,8,0,0,0,6.21-3l32.93-40.52ZM220,92a12,12,0,1,1,12-12A12,12,0,0,1,220,92Z"/></svg>
+        <b>root</b>
       </div>
     </div>
   </div>

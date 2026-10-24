@@ -1,6 +1,57 @@
 <!doctype html>
 <html lang="it">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>VulcaTest — Presentazione</title></head>
-<body><p><a href="presentazione.html">Apri la presentazione VulcaTest</a></p>
-<script>window.location.replace('presentazione.html' + window.location.search + window.location.hash);</script>
-</body></html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="VulcaTest — Presentazione di laurea di Luca Gugliotta. Scegli la versione breve o completa.">
+  <title>VulcaTest — Le presentazioni</title>
+  <style>
+    @font-face{font-family:Libron;src:url('lib/fonts/Libron-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+    @font-face{font-family:Libron;src:url('lib/fonts/Libron-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+    @font-face{font-family:Mono;src:url('lib/fonts/jetbrains-mono-latin-400-normal.woff2') format('woff2');font-display:swap}
+    :root{color-scheme:light;--paper:#FAF7F1;--ink:#4A3F37;--title:#201E1A;--accent:#8F3A1F;--line:#D9CFC2}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Libron,Georgia,serif;min-height:100svh;display:flex;flex-direction:column}
+    body::before{content:'';position:absolute;top:0;left:0;width:146px;height:4px;background:#C4532F}
+    main{width:min(960px,calc(100% - 64px));margin:auto;padding:76px 0 60px}
+    .eyebrow{font:14px/1.6 Mono,monospace;letter-spacing:.025em;color:var(--accent);margin:0 0 22px}
+    h1{font-weight:700;font-size:clamp(58px,9vw,88px);line-height:1.05;letter-spacing:-.035em;margin:0 0 20px;color:var(--title)}
+    .subtitle{font-size:clamp(22px,3vw,29px);line-height:1.4;max-width:690px;margin:0 0 52px}
+    nav{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    nav a{display:block;position:relative;color:var(--ink);text-decoration:none;padding:32px 24px 34px 0;transition:background .18s ease,color .18s ease}
+    nav a+a{border-left:1px solid var(--line);padding-left:40px}
+    nav a:hover{background:#F3EADF;color:var(--accent)}
+    nav a:focus-visible{outline:3px solid var(--accent);outline-offset:6px;z-index:1}
+    .duration{display:block;font:14px/1.5 Mono,monospace;color:var(--accent);margin-bottom:13px}
+    .name{font-size:31px;line-height:1.2;font-weight:700;color:var(--title);display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .arrow{font-family:Georgia,serif;font-size:31px;color:var(--accent);font-weight:400}
+    .author{font-size:17px;line-height:1.6;margin:36px 0 0;color:#756A60}
+    @media(max-width:600px){main{width:calc(100% - 40px);padding:64px 0 36px}.subtitle{margin-bottom:36px}nav{grid-template-columns:1fr}nav a{padding:26px 12px 26px 0}nav a+a{border-left:0;border-top:1px solid var(--line);padding-left:0}.name{font-size:28px}.author{margin-top:28px}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  </style>
+  <script>
+    // Preserve direct links that previously opened a slide through the root URL.
+    if (window.location.hash.startsWith('#/')) {
+      window.location.replace('presentazione.html' + window.location.search + window.location.hash);
+    }
+  </script>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">DISCUSSIONE DI LAUREA</p>
+    <h1>VulcaTest</h1>
+    <p class="subtitle">Verifica e correzione automatica degli scenari per l’addestramento alla cybersecurity.</p>
+    <nav aria-label="Scegli la presentazione">
+      <a href="5-minuti/presentazione.html">
+        <span class="duration">5 MINUTI</span>
+        <span class="name">Versione breve <span class="arrow" aria-hidden="true">↗</span></span>
+      </a>
+      <a href="presentazione.html">
+        <span class="duration">20 MINUTI</span>
+        <span class="name">Versione completa <span class="arrow" aria-hidden="true">↗</span></span>
+      </a>
+    </nav>
+    <p class="author">Luca Gugliotta<br>Università degli Studi di Roma Tor Vergata</p>
+  </main>
+</body>
+</html>
